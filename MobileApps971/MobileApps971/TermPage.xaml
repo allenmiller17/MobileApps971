@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileApps971.TermPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="editTerm"
+                     Text="Edit Term"
+                     Clicked="EditTerm_Clicked"/>
+        <ToolbarItem x:Name="deleteTerm"
+                     Text="Delete Term"
+                     
+                     Clicked="DeleteTerm_Clicked"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout x:Name="term">
+            <StackLayout>
+                <!--#region Course Header-->
+                <Label x:Name="termHearderLabel"
+                VerticalOptions="Start" 
+                HorizontalOptions="CenterAndExpand"
+                Style="{StaticResource Key=titleBar}"/>
+                <!--#endregion-->
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" 
+                         HorizontalOptions="CenterAndExpand">
+
+                <Label Text="Start Date:"
+                   Margin="10,20,0,0"
+                   />
+
+                <DatePicker x:Name="startDatePicker"
+                            Format="MM/dd/yyyy"
+                            DateSelected="StartDatePicker_DateSelected"
+                            Margin="0,10,0,0"/>
+
+                <Label Text="End Date:"
+                       Margin="10,20,0,0"
+                       />
+                <DatePicker x:Name="endDatePicker"
+                            Format="MM/dd/yyyy"
+                            DateSelected="EndDatePicker_DateSelected"
+                            Margin="0,10,0,0"/>
+            </StackLayout>
+
+            <StackLayout Margin="0,30,0,0">
+                <Label Text="Term Courses"
+                       HorizontalOptions="CenterAndExpand"
+                       Font="Bold,20"/>
+                <StackLayout/>
+                <StackLayout x:Name="courses">
+                    <ListView x:Name="courseListView">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell IsEnabled="True">
+                                    <StackLayout Orientation="Vertical" Margin="20,0,0,0">
+                                        <Label Text="{Binding CourseName}" TextColor="DodgerBlue"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Button x:Name="addCourseButton"
+                        Text="Add Course"
+                        Clicked="AddCourseButton_Clicked"
+                        HorizontalOptions="Center"
+                        Margin="0,20,0,20"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

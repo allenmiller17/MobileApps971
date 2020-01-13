@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileApps971.CoursesPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="editCourse" Text="Edit Course" Clicked="EditCourse_Clicked"/>
+        <ToolbarItem x:Name="deleteCourse" Text="Drop Coure" Clicked="DeleteCourse_Clicked"/>
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout>
+                <!--#region Course Header-->
+                <Label x:Name="courseHearderLabel"
+                VerticalOptions="Start" 
+                HorizontalOptions="CenterAndExpand"
+                Style="{StaticResource Key=titleBar}"/>
+                <!--#endregion-->
+            </StackLayout>
+
+
+            <StackLayout VerticalOptions="CenterAndExpand">
+                <TableView Margin="10,30,10,0">
+                    <TableSection>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" Padding="13,0">
+                                <Label x:Name="courseStatusLabel"
+                                   VerticalOptions="Center"/>
+                            </StackLayout>
+                        </ViewCell>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" Padding="13,0">
+                                <Label x:Name="startDateLabel" VerticalOptions="Center"/>
+                            </StackLayout>
+                        </ViewCell>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" Padding="13,0">
+                                <Label x:Name="endDateLabel" VerticalOptions="Center"/>
+                            </StackLayout>
+                        </ViewCell>
+                        <ViewCell>
+                            <StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand" Padding="13,0">
+                                <Label x:Name="instructorNameLabel"/>
+                            </StackLayout>
+                        </ViewCell>
+                        <ViewCell>
+                            <StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand" Padding="13,0">
+                                <Label x:Name="instructorPhoneLabel"/>
+                            </StackLayout>
+                        </ViewCell>
+                        <ViewCell>
+                            <StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand" Padding="13,0">
+                                <Label x:Name="instructorEmailLabel"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </TableSection>
+                </TableView>
+                <StackLayout Orientation="Horizontal">
+                <Button x:Name="addAssessmentsButton" Text="Assessments" Margin="0,20,0,20" Clicked="AddAssessmentsButton_Clicked" HorizontalOptions="CenterAndExpand"/>
+                    <Button x:Name="addCourseNotesButton" Text="Course Notes" Clicked="AddCourseNotesButton_Clicked" HorizontalOptions="CenterAndExpand" Margin="0,20,0,20"/>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

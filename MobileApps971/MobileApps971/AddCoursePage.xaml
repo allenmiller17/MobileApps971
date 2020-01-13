@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileApps971.AddCoursePage">
+
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout>
+                <!--#region Course Header-->
+                <Label x:Name="addCourseHearderLabel"
+                VerticalOptions="Start" 
+                HorizontalOptions="CenterAndExpand"
+                Style="{StaticResource Key=titleBar}"/>
+                <!--#endregion-->
+            </StackLayout>
+            <StackLayout>
+                <Button x:Name="saveButton"
+                        Text="Save"
+                        BackgroundColor="DodgerBlue"
+                        TextColor="White"
+                        Clicked="SaveButton_Clicked"
+                        Margin="20,50,20,10"/>
+            </StackLayout>
+            <TableView Margin="10,30,10,0">
+                <TableSection>
+                    <EntryCell x:Name="courseName"
+                               Label="Course Name:"/>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal"
+                                     Padding="13,0">
+                            <Label Text="Course Status:"
+                                   VerticalOptions="Center"/>
+                            <Picker x:Name="courseStatusPicker"
+                                    Title="Status">
+                                <Picker.Items>
+                                    <x:String>In Progress</x:String>
+                                    <x:String>Not Started</x:String>
+                                    <x:String>Completed</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                    </ViewCell>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="13,0">
+                            <Label Text="Start Date" VerticalOptions="Center"/>
+                            <DatePicker x:Name="startDatePicker"/>
+                        </StackLayout>
+                    </ViewCell>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="13,0">
+                            <Label Text="End Date" VerticalOptions="Center"/>
+                            <DatePicker x:Name="endDatePicker"/>
+                        </StackLayout>
+                    </ViewCell>
+                    <EntryCell Label="Course Instructor Name: " x:Name="instructorNameEntry"/>
+                    <EntryCell Label="Course Instructor Phone: " x:Name="instructorPhoneEntry"
+                               Keyboard="Telephone"/>
+                    <EntryCell Label="Course Instructor Email: " x:Name="instructorEmailEntry"
+                               Keyboard="Email"/>
+                </TableSection>
+            </TableView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

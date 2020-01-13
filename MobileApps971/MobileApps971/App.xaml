@@ -3,6 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileApps971.App">
     <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="titleBarTextBlue">#1E90FF</Color>
+            <Color x:Key="white">#FFFFFF</Color>
+            <Color x:Key="black">#000000</Color>
+
+            <Style x:Key="titleBar" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource titleBarTextBlue}"/>
+                <Setter Property="Font" Value="Bold,35"/>
+                <Setter Property="Margin" Value="0,20,0,0"/>
+            </Style>
+
+            <Style TargetType="Button">
+                <Setter Property="Margin" Value="20,0,20,0"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+
+        </ResourceDictionary>
 
     </Application.Resources>
 </Application>
