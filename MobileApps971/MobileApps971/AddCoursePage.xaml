@@ -13,14 +13,7 @@
                 Style="{StaticResource Key=titleBar}"/>
                 <!--#endregion-->
             </StackLayout>
-            <StackLayout>
-                <Button x:Name="saveButton"
-                        Text="Save"
-                        BackgroundColor="DodgerBlue"
-                        TextColor="White"
-                        Clicked="SaveButton_Clicked"
-                        Margin="20,50,20,10"/>
-            </StackLayout>
+
             <TableView Margin="10,30,10,0">
                 <TableSection>
                     <EntryCell x:Name="courseName"
@@ -59,6 +52,14 @@
                                Keyboard="Email"/>
                 </TableSection>
             </TableView>
+            <StackLayout>
+                <Button x:Name="saveButton"
+                        Text="Save"
+                        BackgroundColor="DodgerBlue"
+                        TextColor="White"
+                        Clicked="SaveButton_Clicked"
+                        Margin="20,50,20,10"/>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

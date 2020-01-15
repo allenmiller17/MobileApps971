@@ -19,13 +19,13 @@ namespace MobileApps971
         private SQLiteAsyncConnection conn;
         private Courses _currentCourse;
 
-		public AddAssessmentsPage (Courses currentCourse)
+		public AddAssessmentsPage (Courses _course)
 		{
 			InitializeComponent ();
 
             addAssessmentsHearderLabel.Text = "Add Assessments";
 
-            _currentCourse = currentCourse;
+            _currentCourse = _course;
             conn = DependencyService.Get<IMobileApps971_db>().GetConnection();
 		}
 
@@ -36,6 +36,7 @@ namespace MobileApps971
             newAssessment.AssessmentType = (string)assessmentTypePicker.SelectedItem;
             newAssessment.AssessmentStart = assessStartDatePicker.Date;
             newAssessment.AssessmentEnd = assessEndDatePicker.Date;
+            newAssessment.CourseId = _currentCourse.CourseId;
             //TODO add notifications
 
             await conn.InsertAsync(newAssessment);

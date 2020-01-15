@@ -4,9 +4,19 @@
              x:Class="MobileApps971.CourseNotesPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <StackLayout VerticalOptions="Start" 
+                         HorizontalOptions="FillAndExpand">
+                <!--#region Course Header-->
+                <Label x:Name="courseNotesHeader"
+                       XAlign="Center"
+                       Style="{StaticResource Key=titleBar}"/>
+                <!--#endregion-->
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Entry Placeholder="Add course notes here" x:Name="courseNotesEntry" MaxLength="1000"/>
+            </StackLayout>
+            <Button x:Name="saveButton" Text="Save" BackgroundColor="DodgerBlue" TextColor="White" Clicked="SaveButton_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

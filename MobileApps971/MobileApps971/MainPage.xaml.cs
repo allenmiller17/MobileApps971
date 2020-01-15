@@ -21,6 +21,7 @@ namespace MobileApps971
         public MainPage()
         {
             InitializeComponent();
+
             conn = DependencyService.Get<IMobileApps971_db>().GetConnection();
             termsListView.ItemTapped += new EventHandler<ItemTappedEventArgs>(Term_Clicked);
             Title = "WGU Home";
@@ -46,8 +47,8 @@ namespace MobileApps971
             newTerm.StartDate = new DateTime(2020, 01, 01);
             newTerm.EndDate = new DateTime(2020, 06, 30);
                 
-            await conn.InsertAsync(newTerm);
-            termList.Add(newTerm);
+            await conn.InsertOrReplaceAsync(newTerm);
+            termList.Add(newTerm); //Getting a Null Exception and not adding any data to the list
             #endregion
 
             #region Course Data
@@ -66,6 +67,7 @@ namespace MobileApps971
                 newCourse.CourseInstructorEmail = "amil133@wgu.edu";
                 newCourse.CourseNotes = "Make sure to study how to add a new class to a mobile application.";
                 newCourse.Notifications = 1;
+                newCourse.Status = "In Progress";
 
                 await conn.InsertAsync(newCourse);
 

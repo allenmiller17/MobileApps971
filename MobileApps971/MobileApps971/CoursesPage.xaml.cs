@@ -52,7 +52,7 @@ namespace MobileApps971
 
         private async void AddAssessmentsButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new AddAssessmentsPage(currentCourse));
+            await Navigation.PushModalAsync(new AssessmentsPage(currentCourse));
         }
 
         private async void DeleteCourse_Clicked(object sender, EventArgs e)

@@ -12,11 +12,7 @@
                 Style="{StaticResource Key=titleBar}"/>
                 <!--#endregion-->
             </StackLayout>
-            <StackLayout>
-                <Button x:Name="saveAssessmentButton" Text="Save"
-                        Margin="20,50,20,10" BackgroundColor="DodgerBlue"
-                        TextColor="White" Clicked="SaveAssessmentButton_Clicked"/>
-            </StackLayout>
+
             <StackLayout VerticalOptions="CenterAndExpand">
                 <TableView Margin="10,30,10,0">
                     <TableSection>
@@ -50,6 +46,11 @@
                         </ViewCell>
                     </TableSection>
                 </TableView>
+            </StackLayout>
+            <StackLayout>
+                <Button x:Name="saveAssessmentButton" Text="Save"
+                        Margin="20,50,20,10" BackgroundColor="DodgerBlue"
+                        TextColor="White" Clicked="SaveAssessmentButton_Clicked"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
