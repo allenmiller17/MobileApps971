@@ -34,8 +34,8 @@ namespace MobileApps971
         {
             courseHearderLabel.Text = $"{currentCourse.CourseName}";
             courseStatusLabel.Text = "Status: " + $"{currentCourse.Status}";
-            startDateLabel.Text = "Start Date: " + $"{currentCourse.StartDate.ToString()}";
-            endDateLabel.Text = "End Date: " + $"{currentCourse.EndDate.ToString()}";
+            startDateLabel.Text = "Start Date: " + $"{currentCourse.CourseStartDate.ToShortDateString()}";
+            endDateLabel.Text = "End Date: " + $"{currentCourse.CourseEndDate.ToShortDateString()}";
             instructorNameLabel.Text = "Course Instructor Name: " + $"{currentCourse.CourseInstructorName}";
             instructorPhoneLabel.Text = "Course Instructor Phone: " + $"{currentCourse.CourseInstructorPhone}";
             instructorEmailLabel.Text = "CourseInstructor Email: " + $"{currentCourse.CourseInstructorEmail}";
@@ -52,7 +52,7 @@ namespace MobileApps971
 
         private async void AddAssessmentsButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new AssessmentsPage(currentCourse));
+            await Navigation.PushAsync(new AssessmentsPage(currentCourse));
         }
 
         private async void DeleteCourse_Clicked(object sender, EventArgs e)
@@ -65,9 +65,9 @@ namespace MobileApps971
             }
         }
 
-        private void EditCourse_Clicked(object sender, EventArgs e)
+        private async void EditCourse_Clicked(object sender, EventArgs e)
         {
-
+            await Navigation.PushModalAsync(new EditCoursePage(currentCourse));
         }
 
         private async void AddCourseNotesButton_Clicked(object sender, EventArgs e)

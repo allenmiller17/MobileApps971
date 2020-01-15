@@ -19,12 +19,11 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell IsEnabled="True">
-                                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                                    <Label Text="{Binding AssessmentType}" VerticalOptions="Center" Font="Bold, 14"/>
-                                    <Label Text="Start: " VerticalOptions="Center" Margin="2,0,1,0" Font="Bold, 14"/>
-                                    <Label Text="{Binding AssessmentStart, StringFormat='{}{0:MM/dd/yyyy}'}" VerticalOptions="Center" TextColor="Blue" Font="14"/>
-                                    <Label Text="End: " VerticalOptions="Center" Margin="10,0,1,0" Font="Bold, 14"/>
-                                    <Label Text="{Binding AssessmentEnd, StringFormat='{}{0:MM/dd/yyyy}'}" VerticalOptions="Center" TextColor="Red" Font="14"/>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="20,0,20,0">
+                                    <Label Text="{Binding AssessmentType}" VerticalOptions="Center" Font="Bold, 14" HorizontalOptions="Start" XAlign="Start"/>
+                                    <Label Text="{Binding AssessmentStart, StringFormat='{}{0:MM/dd/yyyy}'}" VerticalOptions="Center" TextColor="Blue" Font="14" HorizontalOptions="Center"
+                                           Margin="10,0,10,0"/>
+                                    <Label Text="{Binding AssessmentEnd, StringFormat='{}{0:MM/dd/yyyy}'}" VerticalOptions="Center" TextColor="Red" Font="14" HorizontalOptions="End"/>
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>

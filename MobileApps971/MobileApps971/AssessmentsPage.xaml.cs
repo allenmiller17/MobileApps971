@@ -28,6 +28,8 @@ namespace MobileApps971
             assessmentsPageHeader.Text = $"{_course.CourseName}" + "'s Assessments";
 
             conn = DependencyService.Get<IMobileApps971_db>().GetConnection();
+
+            assessmentsListView.ItemTapped += new EventHandler<ItemTappedEventArgs>(Assessment_Tapped);
         }
 
         protected override async void OnAppearing()
@@ -37,12 +39,19 @@ namespace MobileApps971
             assessmentsListView.ItemsSource = assessmentsList;
 
             
+
             base.OnAppearing();
         }
 
         private async void AddAssessmentButton_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new AddAssessmentsPage(_course));
+        }
+
+        private async void Assessment_Tapped(object sender, ItemTappedEventArgs e)
+        {
+            Assessments _assessment = (Assessments)e.Item;
+            await Navigation.PushModalAsync(new EditAssessmentsPage(_assessment));
         }
     }
 }

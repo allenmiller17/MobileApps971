@@ -29,19 +29,12 @@ namespace MobileApps971
             conn = DependencyService.Get<IMobileApps971_db>().GetConnection();
         }
 
-        //protected override async void OnApearing()
-        //{
-        //    await conn.CreateTableAsync<Courses>();
-
-        //    base.OnAppearing();
-        //}
-
         private async void SaveButton_Clicked(object sender, EventArgs e)
         {
             var newCourse = new Courses();
             newCourse.CourseName = courseName.Text;
-            newCourse.StartDate = startDatePicker.Date;
-            newCourse.EndDate = endDatePicker.Date;
+            newCourse.CourseStartDate = startDatePicker.Date;
+            newCourse.CourseEndDate = endDatePicker.Date;
             newCourse.Status = (string)courseStatusPicker.SelectedItem;
             newCourse.CourseInstructorName = instructorNameEntry.Text;
             newCourse.CourseInstructorPhone = instructorPhoneEntry.Text;

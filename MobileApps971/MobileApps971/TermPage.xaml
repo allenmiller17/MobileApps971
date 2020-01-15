@@ -22,29 +22,31 @@
                 Style="{StaticResource Key=titleBar}"/>
                 <!--#endregion-->
             </StackLayout>
+            
             <StackLayout Orientation="Horizontal" 
                          HorizontalOptions="CenterAndExpand">
-
                 <Label Text="Start Date:"
-                   Margin="10,20,0,0"
-                   />
-
-                <DatePicker x:Name="startDatePicker"
-                            Format="MM/dd/yyyy"
-                            DateSelected="StartDatePicker_DateSelected"
-                            Margin="0,10,0,0"/>
-
+                       Margin="10,0,0,0"
+                       VerticalOptions="Start"
+                       Font="Bold, 12"/>
+                <Label x:Name="startDateLabel"
+                       Margin="0,0,0,0"
+                       VerticalOptions="Start"
+                       Font="12"
+                       TextColor="Blue"/>
                 <Label Text="End Date:"
-                       Margin="10,20,0,0"
-                       />
-                <DatePicker x:Name="endDatePicker"
-                            Format="MM/dd/yyyy"
-                            DateSelected="EndDatePicker_DateSelected"
-                            Margin="0,10,0,0"/>
+                       Margin="40,0,0,0"
+                       VerticalOptions="Start"
+                       Font="Bold, 12"/>
+                <Label x:Name="endDateLabel"
+                       Margin="0,0,10,0"
+                       VerticalOptions="Start"
+                       Font="12"
+                       TextColor="Red"/>
             </StackLayout>
 
             <StackLayout Margin="0,30,0,0">
-                <Label Text="Term Courses"
+                <Label Text="Courses"
                        HorizontalOptions="CenterAndExpand"
                        Font="Bold,20"/>
                 <StackLayout/>
@@ -53,8 +55,12 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell IsEnabled="True">
-                                    <StackLayout Orientation="Vertical" Margin="20,0,0,0">
-                                        <Label Text="{Binding CourseName}" TextColor="DodgerBlue"/>
+                                    <StackLayout Orientation="Horizontal" Margin="20,0,20,0">
+                                        <Label Text="{Binding CourseName}" HorizontalOptions="StartAndExpand" Font="Bold, 14"/>
+                                        <Label Text="{Binding CourseStartDate, StringFormat='{}{0:MM/dd/yyyy}'}" HorizontalOptions="CenterAndExpand"
+                                               Font="14" TextColor="Blue"/>
+                                        <Label Text="{Binding CourseEndDate, StringFormat='{}{0:MM/dd/yyyy}'}" HorizontalOptions="EndAndExpand"
+                                               Font="14" TextColor="Red"/>
                                     </StackLayout>
                                 </ViewCell>
                             </DataTemplate>
@@ -67,7 +73,8 @@
                         Text="Add Course"
                         Clicked="AddCourseButton_Clicked"
                         HorizontalOptions="Center"
-                        Margin="0,20,0,20"/>
+                        Margin="20,50,20,10" BackgroundColor="DodgerBlue"
+                        TextColor="White"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

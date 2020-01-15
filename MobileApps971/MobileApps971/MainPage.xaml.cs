@@ -15,6 +15,8 @@ namespace MobileApps971
     public partial class MainPage : ContentPage
     {
 
+        //TODO Fix the out of range exception when navigating back from the add term page!
+
         private SQLiteAsyncConnection conn;
         private bool firstTime = true;
         public ObservableCollection<Terms> termList;
@@ -60,8 +62,8 @@ namespace MobileApps971
                 newCourse.CourseId = 1;
                 newCourse.CourseName = "C971 Mobile Apps";
                 newCourse.Term = newTerm.Id;
-                newCourse.StartDate = new DateTime(2020, 01, 01);
-                newCourse.EndDate = new DateTime(2020, 01, 30);
+                newCourse.CourseStartDate = new DateTime(2020, 01, 01);
+                newCourse.CourseEndDate = new DateTime(2020, 01, 30);
                 newCourse.CourseInstructorName = "Allen Miller";
                 newCourse.CourseInstructorPhone = "8018829123";
                 newCourse.CourseInstructorEmail = "amil133@wgu.edu";
@@ -115,12 +117,12 @@ namespace MobileApps971
                     courseId++;
                     if (courses.Notifications == 1)
                     {
-                        if (courses.StartDate == DateTime.Today)
+                        if (courses.CourseStartDate == DateTime.Today)
                         {
                             CrossLocalNotifications.Current.Show("Reminder", $"{courses.CourseName} is starting today.", courseId);
                         }
 
-                        if (courses.EndDate == DateTime.Today)
+                        if (courses.CourseEndDate == DateTime.Today)
                         {
                             CrossLocalNotifications.Current.Show("Reminder", $"{courses.CourseName} is ending today.", courseId);
                         }
@@ -153,9 +155,9 @@ namespace MobileApps971
             base.OnAppearing();
         }
 
-        private void AddTerm_Clicked(object sender, EventArgs e)
+        private async void AddTerm_Clicked(object sender, EventArgs e)
         {
-
+            await Navigation.PushAsync(new AddTermPage(this)); 
         }
 
         async private void Term_Clicked(object sender, ItemTappedEventArgs e)

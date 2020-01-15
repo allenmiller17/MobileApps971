@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileApps971.AddTermPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout>
+                <!--#region Course Header-->
+                <Label x:Name="addTermHearderLabel"
+                VerticalOptions="Start" 
+                HorizontalOptions="CenterAndExpand"
+                Style="{StaticResource Key=titleBar}"/>
+                <!--#endregion-->
+            </StackLayout>
+
+            <TableView Margin="10,30,10,0">
+                <TableSection>
+                    <EntryCell x:Name="termName"
+                               Label="Term Name:"/>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="13,0">
+                            <Label Text="Start Date:" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
+                            <DatePicker x:Name="startDatePicker" HorizontalOptions="StartAndExpand"/>
+                        </StackLayout>
+                    </ViewCell>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="13,0">
+                            <Label Text="End Date:" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
+                            <DatePicker x:Name="endDatePicker" HorizontalOptions="StartAndExpand"/>
+                        </StackLayout>
+                    </ViewCell>
+                </TableSection>
+            </TableView>
+            <StackLayout>
+                <Button x:Name="saveButton"
+                        Text="Save"
+                        BackgroundColor="DodgerBlue"
+                        TextColor="White"
+                        Clicked="SaveButton_Clicked"
+                        Margin="20,50,20,10"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

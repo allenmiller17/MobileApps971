@@ -22,7 +22,7 @@ namespace MobileApps971
         public TermPage(Terms term)
         {
             InitializeComponent();
-            termHearderLabel.Text = term.TermName;
+            
             currentTerm = term;
             connection = DependencyService.Get<IMobileApps971_db>().GetConnection();
             courseListView.ItemTapped += new EventHandler<ItemTappedEventArgs>(Course_Tapped);
@@ -30,8 +30,9 @@ namespace MobileApps971
 
         protected override async void OnAppearing()
         {
-            startDatePicker.Date = currentTerm.StartDate;
-            endDatePicker.Date = currentTerm.EndDate;
+            termHearderLabel.Text = currentTerm.TermName;
+            startDateLabel.Text = currentTerm.StartDate.ToShortDateString();
+            endDateLabel.Text = currentTerm.EndDate.ToShortDateString();
 
             await connection.CreateTableAsync<Courses>();
             var _courseList = await connection.QueryAsync<Courses>($"SELECT * FROM Courses WHERE Term = '{currentTerm.Id}'");
@@ -39,23 +40,14 @@ namespace MobileApps971
 
             courseListView.ItemsSource = courseList;
 
+            
+
             base.OnAppearing();
         }
 
-
-        private void StartDatePicker_DateSelected(object sender, DateChangedEventArgs e)
+        private async void EditTerm_Clicked(object sender, EventArgs e)
         {
-
-        }
-
-        private void EndDatePicker_DateSelected(object sender, DateChangedEventArgs e)
-        {
-
-        }
-
-        private void EditTerm_Clicked(object sender, EventArgs e)
-        {
-
+            await Navigation.PushModalAsync(new EditTermPage(currentTerm));
         }
 
         private async void DeleteTerm_Clicked(object sender, EventArgs e)

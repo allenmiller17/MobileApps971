@@ -13,8 +13,8 @@
                 <!--#endregion-->
             </StackLayout>
 
-            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                <Entry Placeholder="Add course notes here" x:Name="courseNotesEntry" MaxLength="1000"/>
+            <StackLayout Orientation="Horizontal">
+                <Editor Placeholder="Add course notes here" x:Name="courseNotesEntry" MaxLength="10000" HeightRequest="300" HorizontalOptions="FillAndExpand"/>
             </StackLayout>
             <Button x:Name="saveButton" Text="Save" BackgroundColor="DodgerBlue" TextColor="White" Clicked="SaveButton_Clicked"/>
         </StackLayout>

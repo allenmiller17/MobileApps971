@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MobileApps971.AddAssessmentsPage">
+             x:Class="MobileApps971.EditAssessmentsPage">
     <ContentPage.Content>
         <StackLayout>
-            <StackLayout>
+            <StackLayout VerticalOptions="FillAndExpand">
                 <!--#region Course Header-->
-                <Label x:Name="addAssessmentsHearderLabel"
-                VerticalOptions="Start" 
+                <Label x:Name="editAssessmentsHearderLabel"
+                       XAlign="Center" 
                 HorizontalOptions="CenterAndExpand"
                 Style="{StaticResource Key=titleBar}"/>
                 <!--#endregion-->
@@ -16,7 +16,7 @@
             <StackLayout VerticalOptions="CenterAndExpand">
                 <TableView Margin="10,30,10,0">
                     <TableSection>
-                        <EntryCell Label="Assessment Name" x:Name="assessmentName"/>
+                        <EntryCell x:Name="assessmentName" Label="Assessment Name:"/>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal" Padding="13,0">
                                 <Picker x:Name="assessmentTypePicker" Title="Assessment Type" HorizontalOptions="FillAndExpand">
@@ -45,7 +45,10 @@
             <StackLayout>
                 <Button x:Name="saveAssessmentButton" Text="Save"
                         Margin="20,50,20,10" BackgroundColor="DodgerBlue"
-                        TextColor="White" Clicked="SaveAssessmentButton_Clicked"/>
+                        TextColor="White"
+                        Clicked="SaveAssessmentButton_Clicked"/>
+                <Button x:Name="deleteAssessmentButton" Text="Delete Assessment" 
+                        BackgroundColor="Red" TextColor="White" Clicked="DeleteAssessmentButton_Clicked" Margin="20,10,20,10"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
