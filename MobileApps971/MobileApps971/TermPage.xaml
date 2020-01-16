@@ -11,69 +11,72 @@
                      
                      Clicked="DeleteTerm_Clicked"/>
     </ContentPage.ToolbarItems>
-
-    <ContentPage.Content>
-        <StackLayout x:Name="term">
-            <StackLayout>
-                <!--#region Course Header-->
-                <Label x:Name="termHearderLabel"
+        <ContentPage.Content>
+        <StackLayout>
+            
+            <StackLayout x:Name="term">
+                <StackLayout>
+                    <!--#region Course Header-->
+                    <Label x:Name="termHearderLabel"
                 VerticalOptions="Start" 
                 HorizontalOptions="CenterAndExpand"
                 Style="{StaticResource Key=titleBar}"/>
-                <!--#endregion-->
-            </StackLayout>
-            
-            <StackLayout Orientation="Horizontal" 
+                    <!--#endregion-->
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" 
                          HorizontalOptions="CenterAndExpand">
-                <Label Text="Start Date:"
+                    <Label Text="Start Date:"
                        Margin="10,0,0,0"
                        VerticalOptions="Start"
                        Font="Bold, 12"/>
-                <Label x:Name="startDateLabel"
+                    <Label x:Name="startDateLabel"
                        Margin="0,0,0,0"
                        VerticalOptions="Start"
                        Font="12"
                        TextColor="Blue"/>
-                <Label Text="End Date:"
+                    <Label Text="End Date:"
                        Margin="40,0,0,0"
                        VerticalOptions="Start"
                        Font="Bold, 12"/>
-                <Label x:Name="endDateLabel"
+                    <Label x:Name="endDateLabel"
                        Margin="0,0,10,0"
                        VerticalOptions="Start"
                        Font="12"
                        TextColor="Red"/>
-            </StackLayout>
+                </StackLayout>
 
-            <StackLayout Margin="0,30,0,0">
-                <Label Text="Courses"
+                <StackLayout Margin="0,30,0,0">
+                    <Label Text="Courses"
                        HorizontalOptions="CenterAndExpand"
                        Font="Bold,20"/>
-                <StackLayout/>
-                <StackLayout x:Name="courses">
-                    <ListView x:Name="courseListView">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell IsEnabled="True">
-                                    <StackLayout Orientation="Horizontal" Margin="20,0,20,0">
-                                        <Label Text="{Binding CourseName}" HorizontalOptions="StartAndExpand" Font="Bold, 14"/>
-                                        <Label Text="{Binding CourseStartDate, StringFormat='{}{0:MM/dd/yyyy}'}" HorizontalOptions="CenterAndExpand"
+                    <StackLayout/>
+                    <StackLayout x:Name="courses">
+                        <ListView x:Name="courseListView">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell IsEnabled="True">
+                                        <StackLayout Orientation="Horizontal" Margin="20,0,20,0">
+                                            <Label Text="{Binding CourseName}" HorizontalOptions="StartAndExpand" Font="Bold, 14"/>
+                                            <Label Text="{Binding CourseStartDate, StringFormat='{}{0:MM/dd/yyyy}'}" HorizontalOptions="CenterAndExpand"
                                                Font="14" TextColor="Blue"/>
-                                        <Label Text="{Binding CourseEndDate, StringFormat='{}{0:MM/dd/yyyy}'}" HorizontalOptions="EndAndExpand"
+                                            <Label Text="{Binding CourseEndDate, StringFormat='{}{0:MM/dd/yyyy}'}" HorizontalOptions="EndAndExpand"
                                                Font="14" TextColor="Red"/>
-                                    </StackLayout>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                                        </StackLayout>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
                 </StackLayout>
             </StackLayout>
-            <Button x:Name="addCourseButton"
+            <StackLayout>
+                <Button x:Name="addCourseButton"
                         Text="Add Course"
                         Clicked="AddCourseButton_Clicked"
-                        HorizontalOptions="Center"
                         Margin="20,50,20,10" BackgroundColor="DodgerBlue"
                         TextColor="White"/>
             </StackLayout>
+    </StackLayout>
     </ContentPage.Content>
 </ContentPage>

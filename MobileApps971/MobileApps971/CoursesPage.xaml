@@ -57,7 +57,7 @@
                     </TableSection>
                 </TableView>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Start" Padding="13,0">
-                    <Label Text="Course Notifications: "/>
+                    <Label Text="Start and End Reminders: "/>
                     <Switch x:Name="notificationsSwitch" Toggled="NotificationsSwitch_Toggled"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">

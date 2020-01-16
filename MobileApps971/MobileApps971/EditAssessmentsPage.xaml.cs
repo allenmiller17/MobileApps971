@@ -53,17 +53,26 @@ namespace MobileApps971
             updatedAssessment.AssessmentEnd = assessEndDatePicker.Date;
             updatedAssessment.AssessmentNotifications = notificationsSwitch.IsToggled == true ? 1 : 0;
 
-            //Date Validation
-            if (updatedAssessment.AssessmentStart <= updatedAssessment.AssessmentEnd)
+            //Makes sure no Null fields exist
+            if (!HelperClass.IsNull(assessmentName.Text) && !HelperClass.IsNull(assessStartDatePicker.Date.ToShortDateString())
+                && !HelperClass.IsNull(assessEndDatePicker.Date.ToShortDateString()))
             {
-                await conn.UpdateAsync(updatedAssessment);
-                await DisplayAlert("Notice", "Assessessment Successfully Updated", "Ok");
-                await Navigation.PopModalAsync(); 
+                //Date Validation
+                if (updatedAssessment.AssessmentStart <= updatedAssessment.AssessmentEnd)
+                {
+                    await conn.UpdateAsync(updatedAssessment);
+                    await DisplayAlert("Notice", "Assessessment Successfully Updated", "Ok");
+                    await Navigation.PopModalAsync();
+                }
+                else
+                {
+                    await DisplayAlert("Warning!", "Start date must be earlier than end date!", "Ok");
+                }  
             }
             else
             {
-                await DisplayAlert("Warning!", "Start date must be earlier than end date!", "Ok");
-            }                                      
+                await DisplayAlert("Warning!", "All fields are required. Please try again!", "Ok");
+            }
         }
 
         private async void DeleteAssessmentButton_Clicked(object sender, EventArgs e)

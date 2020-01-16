@@ -14,25 +14,25 @@
                 <!--#endregion-->
             </StackLayout>
 
-            <StackLayout VerticalOptions="FillAndExpand" x:Name="assessments">
+            <Grid VerticalOptions="FillAndExpand" x:Name="assessments">
                 <ListView x:Name="assessmentsListView" VerticalOptions="Center" Margin="10,30,10,0">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell IsEnabled="True">
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="20,0,20,0">
-                                    <Label Text="{Binding AssessmentType}" VerticalOptions="Center" Font="Bold, 14" 
+                                    <Label Text="{Binding AssessmentType}" VerticalOptions="Center" Font="Bold, 12" 
                                            HorizontalOptions="Start" XAlign="Start"/>
                                     <Label Text="{Binding AssessmentStart, StringFormat='{}{0:MM/dd/yyyy}'}" 
-                                           VerticalOptions="Center" TextColor="Blue" Font="14" HorizontalOptions="Center"
+                                           VerticalOptions="Center" TextColor="Blue" Font="12" HorizontalOptions="Center"
                                            Margin="10,0,10,0"/>
                                     <Label Text="{Binding AssessmentEnd, StringFormat='{}{0:MM/dd/yyyy}'}" 
-                                           VerticalOptions="Center" TextColor="Red" Font="14" HorizontalOptions="End"/>
+                                           VerticalOptions="Center" TextColor="Red" Font="12" HorizontalOptions="End"/>
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-            </StackLayout>
+            </Grid>
             <Button x:Name="addAssessmentButton" Text="Add Assessment" BackgroundColor="DodgerBlue" 
                     TextColor="White" Clicked="AddAssessmentButton_Clicked" Margin="20, 50, 20, 10"/>
         </StackLayout>

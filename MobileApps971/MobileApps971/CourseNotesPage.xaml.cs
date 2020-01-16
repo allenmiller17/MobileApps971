@@ -9,6 +9,8 @@ using Xamarin.Forms.Xaml;
 using SQLite;
 using MobileApps971.Model;
 using System.Collections.ObjectModel;
+using Xamarin.Essentials;
+
 namespace MobileApps971
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
@@ -38,6 +40,11 @@ namespace MobileApps971
             await conn.UpdateAsync(_currentCourse);
             await DisplayAlert("Success", "Course Notes have been updated", "ok");
             await Navigation.PopModalAsync();
+        }
+
+        private void ShareButton_Clicked(object sender, EventArgs e)
+        {
+            Share.RequestAsync(new ShareTextRequest { Text = courseNotesEntry.Text, Title = "Share Course Notes" });
         }
     }
 }

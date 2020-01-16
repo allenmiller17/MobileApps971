@@ -62,7 +62,14 @@ namespace MobileApps971
 
         private async void AddCourseButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new AddCoursePage(currentTerm));
+            if (courseList.Count<Courses>() >= 6)
+            {
+                await DisplayAlert("Warning", "A maximum of 6 courses are allowed per term.", "Ok");
+            }
+            else
+            {
+                await Navigation.PushModalAsync(new AddCoursePage(currentTerm)); 
+            }
         }
 
         private async void Course_Tapped(object sender, ItemTappedEventArgs e)

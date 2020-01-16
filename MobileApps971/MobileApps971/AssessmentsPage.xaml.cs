@@ -18,7 +18,7 @@ namespace MobileApps971
 
         private Courses _course;
         private SQLiteAsyncConnection conn;
-        private ObservableCollection<Assessments> assessmentsList;
+        private ObservableCollection<Assessments> _assessmentsList;
 
 		public AssessmentsPage (Courses courses)
 		{
@@ -36,7 +36,8 @@ namespace MobileApps971
         {
             await conn.CreateTableAsync<Assessments>();
             var assessmentsList = await conn.QueryAsync<Assessments>($"SELECT * FROM Assessments WHERE CourseId = '{_course.CourseId}'");
-            assessmentsListView.ItemsSource = assessmentsList;
+            _assessmentsList = new ObservableCollection<Assessments>(assessmentsList);
+            assessmentsListView.ItemsSource = _assessmentsList;
 
             
 
@@ -45,7 +46,15 @@ namespace MobileApps971
 
         private async void AddAssessmentButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new AddAssessmentsPage(_course));
+
+            if (_assessmentsList.Count<Assessments>() >= 2)
+            {
+                await DisplayAlert("Warning!", "You cannot add more than 2 assessments for a course.", "Ok");
+            }
+            else
+            {
+                await Navigation.PushModalAsync(new AddAssessmentsPage(_course));
+            }
         }
 
         private async void Assessment_Tapped(object sender, ItemTappedEventArgs e)

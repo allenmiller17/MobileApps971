@@ -120,11 +120,13 @@ namespace MobileApps971
                         if (courses.CourseStartDate == DateTime.Today)
                         {
                             CrossLocalNotifications.Current.Show("Reminder", $"{courses.CourseName} is starting today.", courseId);
+                            await DisplayAlert("Notice", "You have a course starting today", "Ok");
                         }
 
                         if (courses.CourseEndDate == DateTime.Today)
                         {
                             CrossLocalNotifications.Current.Show("Reminder", $"{courses.CourseName} is ending today.", courseId);
+                            await DisplayAlert("Notice", "You have a course ending today", "Ok");
                         }
                     }
                 }
@@ -139,12 +141,14 @@ namespace MobileApps971
                 {
                     if (assessments.AssessmentStart == DateTime.Today)
                     {
-                        CrossLocalNotifications.Current.Show("Reminder", $"{assessments.AssessmentName} is ending today.", courseId);
+                        CrossLocalNotifications.Current.Show("Reminder", $"{assessments.AssessmentName} is starting today.", courseId);
+                        await DisplayAlert("Notice", "You have an assessment starting today", "Ok");
                     }
 
                     if (assessments.AssessmentEnd == DateTime.Today)
                     {
                         CrossLocalNotifications.Current.Show("Reminder", $"{assessments.AssessmentName} is ending today.", courseId);
+                        await DisplayAlert("Notice", "You have an assessment ending today", "Ok");
                     }
                 }
 

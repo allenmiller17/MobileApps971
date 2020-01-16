@@ -42,7 +42,7 @@
                 </TableView>
             </StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="Start" Padding="13,0">
-                <Label Text="Assessment Notifications: "/>
+                <Label Text="Start and End Reminders: "/>
                 <Switch x:Name="notificationsSwitch" Toggled="NotificationsSwitch_Toggled"/>
             </StackLayout>
             <StackLayout>

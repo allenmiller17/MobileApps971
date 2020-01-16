@@ -44,16 +44,27 @@ namespace MobileApps971
             updateTerm.StartDate = startDatePicker.Date;
             updateTerm.EndDate = endDatePicker.Date;
 
-            if (startDatePicker.Date <= endDatePicker.Date)
+            //Makes sure No Null Fields Exist
+            if (!HelperClass.IsNull(termName.Text) && !HelperClass.IsNull(startDatePicker.Date.ToShortDateString()) && !HelperClass.IsNull(endDatePicker.Date.ToShortDateString()))
             {
-                await conn.UpdateAsync(updateTerm);
-                await DisplayAlert("Notice", $"{_currentTerm.TermName}" + " Updated", "Ok");
-                await Navigation.PopModalAsync(); 
+                //Date Validtation
+                if (updateTerm.StartDate <= updateTerm.EndDate)
+                {
+
+                    await conn.UpdateAsync(updateTerm);
+                    await DisplayAlert("Notice", $"{_currentTerm.TermName}" + " Updated", "Ok");
+                    await Navigation.PopModalAsync();
+                }
+                else
+                {
+                    await DisplayAlert("Warning!", "Start date must be earlier than end date!", "Ok");
+                }
             }
             else
             {
-                await DisplayAlert("Warning!", "Start date must be earlier than end date!", "Ok");
+                await DisplayAlert("Warning!", "All fields are required. Please try again!", "Ok");
             }
+
         }
     }
 }

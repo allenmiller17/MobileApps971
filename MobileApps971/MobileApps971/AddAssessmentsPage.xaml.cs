@@ -37,22 +37,29 @@ namespace MobileApps971
                 $"FROM Assessments " +
                 $"WHERE CourseId = '{_currentCourse.CourseId}'");
 
+            //assessmentTypePicker.Items.Add("Objective Assessment");
+            //assessmentTypePicker.Items.Add("Performance Assessment");
+
             //Checks to see if the current course has any assessments already... If so then Only the unused type is added to the picker
-            foreach (Assessments assessments in assessList)
+            if (assessList.Count() == 0)
             {
-                if (String.IsNullOrEmpty(assessments.AssessmentType))
+                assessmentTypePicker.Items.Add("Objective Assessment");
+                assessmentTypePicker.Items.Add("Performance Assessment");
+            }
+            else
+            {
+                foreach (Assessments assessments in assessList)
                 {
-                    assessmentTypePicker.Items.Add("Objective Assessment");
-                    assessmentTypePicker.Items.Add("Performance Assessment");
-                }
-                else if (assessments.AssessmentType == "Objective Assessment")
-                {
-                    assessmentTypePicker.Items.Add("Performance Assessment");
-                }
-                else
-                {
-                    assessmentTypePicker.Items.Add("Objective Assessment");
-                }
+
+                    if (assessments.AssessmentType == "Objective Assessment")
+                    {
+                        assessmentTypePicker.Items.Add("Performance Assessment");
+                    }
+                    else if (assessments.AssessmentType == "Performance Assessment")
+                    {
+                        assessmentTypePicker.Items.Add("Objective Assessment");
+                    }
+                } 
             }
         }
 
@@ -66,16 +73,25 @@ namespace MobileApps971
             newAssessment.CourseId = _currentCourse.CourseId;
             newAssessment.AssessmentNotifications = notificationsSwitch.IsToggled == true ? 1 : 0;
 
-            //Date Validation
-            if (newAssessment.AssessmentStart <= newAssessment.AssessmentEnd)
+            //Makes sure no Null Fields exist
+            if (!HelperClass.IsNull(assessmentName.Text) && !HelperClass.IsNull((string)assessmentTypePicker.SelectedItem) &&
+                !HelperClass.IsNull(assessStartDatePicker.Date.ToShortDateString()) && !HelperClass.IsNull(assessEndDatePicker.Date.ToShortDateString()))
             {
-                await conn.InsertAsync(newAssessment);
-                await DisplayAlert("Notice", "Assessment Added to Course", "Ok");
-                await Navigation.PopModalAsync(); 
+                //Date Validation
+                if (newAssessment.AssessmentStart <= newAssessment.AssessmentEnd)
+                {
+                    await conn.InsertAsync(newAssessment);
+                    await DisplayAlert("Notice", "Assessment Added to Course", "Ok");
+                    await Navigation.PopModalAsync();
+                }
+                else
+                {
+                    await DisplayAlert("Warning!", "Start date must be earlier than end date!", "Ok");
+                } 
             }
             else
             {
-                await DisplayAlert("Warning!", "Start date must be earlier than end date!", "Ok");
+                await DisplayAlert("Warning!", "All fields are required. Please try again!", "Ok");
             }
         }
 

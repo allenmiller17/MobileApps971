@@ -13,10 +13,11 @@
                 <!--#endregion-->
             </StackLayout>
 
-            <StackLayout Orientation="Horizontal">
-                <Editor Placeholder="Add course notes here" x:Name="courseNotesEntry" MaxLength="10000" HeightRequest="300" HorizontalOptions="FillAndExpand"/>
+            <StackLayout>
+                <Editor Placeholder="Add course notes here" x:Name="courseNotesEntry" MaxLength="10000" AutoSize="TextChanges" HorizontalOptions="FillAndExpand" Margin="20,0,0,10"/>
             </StackLayout>
             <Button x:Name="saveButton" Text="Save" BackgroundColor="DodgerBlue" TextColor="White" Clicked="SaveButton_Clicked"/>
+            <Button x:Name="shareButton" Text="Share" Clicked="ShareButton_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

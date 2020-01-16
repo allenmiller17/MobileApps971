@@ -40,17 +40,20 @@ namespace MobileApps971
             newCourse.CourseInstructorPhone = instructorPhoneEntry.Text;
             newCourse.CourseInstructorEmail = instructorEmailEntry.Text;
             newCourse.Term = _currentTerm.Id;
-            //TODO add notifications
 
+            //Makes sure no Null Fields Exist
             if (!HelperClass.IsNull(courseName.Text) && !HelperClass.IsNull(startDatePicker.Date.ToShortDateString()) &&
                             !HelperClass.IsNull(endDatePicker.Date.ToShortDateString()) &&
                             !HelperClass.IsNull((string)courseStatusPicker.SelectedItem) && !HelperClass.IsNull(instructorNameEntry.Text) &&
                             !HelperClass.IsNull(instructorPhoneEntry.Text) && !HelperClass.IsNull(instructorEmailEntry.Text))
             {
+                //Checks for valid @wgu.edu email
                 if (HelperClass.EmailIsValid(instructorEmailEntry.Text))
                 {
+                    //Checks for 10 digits and no other characters in phone field
                     if (HelperClass.PhoneIsValid(instructorPhoneEntry.Text))
                     {
+                        //Date Validation
                         if (newCourse.CourseStartDate <= newCourse.CourseEndDate)
                         {
                             await conn.InsertAsync(newCourse);
