@@ -32,6 +32,7 @@ namespace MobileApps971
         protected override async void OnAppearing()
         {
             await conn.CreateTableAsync<Assessments>();
+            
 
             assessmentName.Text = _currentAssessment.AssessmentName;
             assessmentTypePicker.SelectedItem = _currentAssessment.AssessmentType;
@@ -43,15 +44,33 @@ namespace MobileApps971
 
         private async void SaveAssessmentButton_Clicked(object sender, EventArgs e)
         {
+            await conn.CreateTableAsync<Assessments>();
+            var assessList =
+                await conn.QueryAsync<Assessments>($"SELECT Type " +
+                $"FROM Assessments " +
+                $"WHERE CourseId = '{_currentAssessment.CourseId}'");
             var updatedAssessment = _currentAssessment;
             updatedAssessment.AssessmentName = assessmentName.Text;
             updatedAssessment.AssessmentType = (string)assessmentTypePicker.SelectedItem;
             updatedAssessment.AssessmentStart = assessStartDatePicker.Date;
             updatedAssessment.AssessmentEnd = assessEndDatePicker.Date;
 
-            await conn.UpdateAsync(updatedAssessment);
-            await DisplayAlert("Notice", "Assessessment Successfully Updated", "Ok");
-            await Navigation.PopModalAsync();
+            foreach (Assessments assessments in assessList)
+            {
+                if (updatedAssessment.AssessmentType == assessments.AssessmentType)
+                {
+                    await DisplayAlert("Warning",
+                        "There may only be one of each assessment type per course." +
+                        " Please try again", "Ok");
+                }
+                else
+                {
+                    await conn.UpdateAsync(updatedAssessment);
+                    await DisplayAlert("Notice", "Assessessment Successfully Updated", "Ok");
+                    await Navigation.PopModalAsync();
+                }
+            }
+
         }
 
         private async void DeleteAssessmentButton_Clicked(object sender, EventArgs e)

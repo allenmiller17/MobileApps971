@@ -39,7 +39,7 @@ namespace MobileApps971
             {
                 await conn.InsertAsync(newTerm);
 
-                mainPage.termList.Add(newTerm);
+                mainPage._termList.Add(newTerm);
                 await DisplayAlert("Success!", $"{newTerm.TermName}" + " Added", "Ok");
                 await Navigation.PopModalAsync(); 
             }

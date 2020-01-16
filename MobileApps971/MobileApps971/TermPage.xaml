@@ -68,14 +68,12 @@
                     </ListView>
                 </StackLayout>
             </StackLayout>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                <Button x:Name="addCourseButton"
+            <Button x:Name="addCourseButton"
                         Text="Add Course"
                         Clicked="AddCourseButton_Clicked"
                         HorizontalOptions="Center"
                         Margin="20,50,20,10" BackgroundColor="DodgerBlue"
                         TextColor="White"/>
             </StackLayout>
-        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

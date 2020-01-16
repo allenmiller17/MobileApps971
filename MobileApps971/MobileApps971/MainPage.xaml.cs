@@ -14,24 +14,24 @@ namespace MobileApps971
 {
     public partial class MainPage : ContentPage
     {
-
-        //TODO Fix the out of range exception when navigating back from the add term page!
-
         private SQLiteAsyncConnection conn;
         private bool firstTime = true;
-        public ObservableCollection<Terms> termList;
+        public ObservableCollection<Terms> _termList;
+
         public MainPage()
         {
             InitializeComponent();
 
+
             conn = DependencyService.Get<IMobileApps971_db>().GetConnection();
             termsListView.ItemTapped += new EventHandler<ItemTappedEventArgs>(Term_Clicked);
             Title = "WGU Home";
-            
+
         }
 
         protected override async void OnAppearing()
         {
+
             await conn.CreateTableAsync<Terms>();
             await conn.CreateTableAsync<Courses>();
             await conn.CreateTableAsync<Assessments>();
@@ -41,22 +41,22 @@ namespace MobileApps971
             //Hardcoded Data
 
             #region Term Data
-            if(!termsList.Any())
+            if (!termsList.Any())
             {
-            //Term Data
-            var newTerm = new Terms();
-            newTerm.TermName = "Term 1";
-            newTerm.StartDate = new DateTime(2020, 01, 01);
-            newTerm.EndDate = new DateTime(2020, 06, 30);
-                
-            await conn.InsertOrReplaceAsync(newTerm);
-            termList.Add(newTerm); //Getting a Null Exception and not adding any data to the list
-            #endregion
+                //Term Data
+                var newTerm = new Terms();
+                newTerm.TermName = "Term 1";
+                newTerm.StartDate = new DateTime(2020, 01, 01);
+                newTerm.EndDate = new DateTime(2020, 06, 30);
 
-            #region Course Data
+                await conn.InsertOrReplaceAsync(newTerm);
+                termsList.Add(newTerm);
+                #endregion
 
-            
-            
+                #region Course Data
+
+
+
                 //Course Data
                 var newCourse = new Courses();
                 newCourse.CourseId = 1;
@@ -150,14 +150,14 @@ namespace MobileApps971
 
                 #endregion
             }
-            termList = new ObservableCollection<Terms>(termsList);
+            _termList = new ObservableCollection<Terms>(termsList);
             termsListView.ItemsSource = termsList;
             base.OnAppearing();
         }
 
         private async void AddTerm_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new AddTermPage(this)); 
+            await Navigation.PushModalAsync(new AddTermPage(this));
         }
 
         async private void Term_Clicked(object sender, ItemTappedEventArgs e)

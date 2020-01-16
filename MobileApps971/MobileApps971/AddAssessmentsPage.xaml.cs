@@ -29,6 +29,32 @@ namespace MobileApps971
             conn = DependencyService.Get<IMobileApps971_db>().GetConnection();
 		}
 
+        protected override async void OnAppearing()
+        {
+            await conn.CreateTableAsync<Assessments>();
+            var assessList = 
+                await conn.QueryAsync<Assessments>($"SELECT Type " +
+                $"FROM Assessments " +
+                $"WHERE CourseId = '{_currentCourse.CourseId}'");
+
+            foreach (Assessments assessments in assessList)
+            {
+                if (String.IsNullOrEmpty(assessments.AssessmentType))
+                {
+                    assessmentTypePicker.Items.Add("Objective Assessment");
+                    assessmentTypePicker.Items.Add("Performance Assessment");
+                }
+                else if (assessments.AssessmentType == "Objective Assessment")
+                {
+                    assessmentTypePicker.Items.Add("Performance Assessment");
+                }
+                else
+                {
+                    assessmentTypePicker.Items.Add("Objective Assessment");
+                }
+            }
+        }
+
         private async void SaveAssessmentButton_Clicked(object sender, EventArgs e)
         {
             var newAssessment = new Assessments();
