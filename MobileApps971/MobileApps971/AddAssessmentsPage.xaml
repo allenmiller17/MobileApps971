@@ -21,8 +21,7 @@
                             <StackLayout Orientation="Horizontal" Padding="13,0">
                                 <Picker x:Name="assessmentTypePicker" Title="Assessment Type" HorizontalOptions="FillAndExpand">
                                     <Picker.Items>
-                                        <x:String>Objective Assessment</x:String>
-                                        <x:String>Performance Assessment</x:String>
+                                        
                                     </Picker.Items>
                                 </Picker>
                             </StackLayout>
@@ -41,6 +40,10 @@
                         </ViewCell>
                     </TableSection>
                 </TableView>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Start" Padding="13,0">
+                <Label Text="Assessment Notifications: "/>
+                <Switch x:Name="notificationsSwitch" Toggled="NotificationsSwitch_Toggled"/>
             </StackLayout>
             <StackLayout>
                 <Button x:Name="saveAssessmentButton" Text="Save"

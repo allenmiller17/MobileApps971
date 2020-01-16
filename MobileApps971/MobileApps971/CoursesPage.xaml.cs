@@ -39,6 +39,7 @@ namespace MobileApps971
             instructorNameLabel.Text = "Course Instructor Name: " + $"{currentCourse.CourseInstructorName}";
             instructorPhoneLabel.Text = "Course Instructor Phone: " + $"{currentCourse.CourseInstructorPhone}";
             instructorEmailLabel.Text = "CourseInstructor Email: " + $"{currentCourse.CourseInstructorEmail}";
+            notificationsSwitch.IsToggled = currentCourse.Notifications == 1 ? true : false;
 
 
             await conn.CreateTableAsync<Assessments>();
@@ -73,6 +74,14 @@ namespace MobileApps971
         private async void AddCourseNotesButton_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new CourseNotesPage(currentCourse));
+        }
+
+        private async void NotificationsSwitch_Toggled(object sender, ToggledEventArgs e)
+        {
+
+            currentCourse.Notifications = notificationsSwitch.IsToggled == true ? 1 : 0;
+
+            await conn.UpdateAsync(currentCourse);
         }
     }
 }

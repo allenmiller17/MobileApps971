@@ -56,6 +56,10 @@
                         </ViewCell>
                     </TableSection>
                 </TableView>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Start" Padding="13,0">
+                    <Label Text="Course Notifications: "/>
+                    <Switch x:Name="notificationsSwitch" Toggled="NotificationsSwitch_Toggled"/>
+                </StackLayout>
                 <StackLayout Orientation="Horizontal">
                 <Button x:Name="addAssessmentsButton" Text="Assessments" Margin="0,20,0,20" Clicked="AddAssessmentsButton_Clicked" HorizontalOptions="CenterAndExpand"/>
                     <Button x:Name="addCourseNotesButton" Text="Course Notes" Clicked="AddCourseNotesButton_Clicked" HorizontalOptions="CenterAndExpand" Margin="0,20,0,20"/>

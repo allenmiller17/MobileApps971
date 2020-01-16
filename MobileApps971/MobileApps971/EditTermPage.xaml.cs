@@ -44,9 +44,16 @@ namespace MobileApps971
             updateTerm.StartDate = startDatePicker.Date;
             updateTerm.EndDate = endDatePicker.Date;
 
-            await conn.UpdateAsync(updateTerm);
-            await DisplayAlert("Notice", $"{_currentTerm.TermName}" + " Updated", "Ok");
-            await Navigation.PopModalAsync();
+            if (startDatePicker.Date <= endDatePicker.Date)
+            {
+                await conn.UpdateAsync(updateTerm);
+                await DisplayAlert("Notice", $"{_currentTerm.TermName}" + " Updated", "Ok");
+                await Navigation.PopModalAsync(); 
+            }
+            else
+            {
+                await DisplayAlert("Warning!", "Start date must be earlier than end date!", "Ok");
+            }
         }
     }
 }

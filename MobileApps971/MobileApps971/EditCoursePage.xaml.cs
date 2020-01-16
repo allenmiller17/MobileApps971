@@ -55,9 +55,40 @@ namespace MobileApps971
             updatedCourse.CourseInstructorPhone = instructorPhoneEntry.Text;
             updatedCourse.CourseInstructorEmail = instructorEmailEntry.Text;
 
-            await conn.UpdateAsync(updatedCourse);
-            await DisplayAlert("Notice", $"{_currentCourse.CourseName}" + " Updated", "Ok");
-            await Navigation.PopModalAsync();
+            if (!HelperClass.IsNull(courseName.Text) && !HelperClass.IsNull(startDatePicker.Date.ToShortDateString()) &&
+                !HelperClass.IsNull(endDatePicker.Date.ToShortDateString()) &&
+                !HelperClass.IsNull((string)courseStatusPicker.SelectedItem) && !HelperClass.IsNull(instructorNameEntry.Text) &&
+                !HelperClass.IsNull(instructorPhoneEntry.Text) && !HelperClass.IsNull(instructorEmailEntry.Text))
+            {
+                if (HelperClass.EmailIsValid(instructorEmailEntry.Text))
+                {
+                    if (HelperClass.PhoneIsValid(instructorPhoneEntry.Text))
+                    {
+                        if (updatedCourse.CourseStartDate <= updatedCourse.CourseEndDate)
+                        {
+                            await conn.UpdateAsync(updatedCourse);
+                            await DisplayAlert("Notice", $"{_currentCourse.CourseName}" + " Updated", "Ok");
+                            await Navigation.PopModalAsync();
+                        }
+                        else
+                        {
+                            await DisplayAlert("Warning!", "Start date must be earlier than end date!", "Ok");
+                        } 
+                    }
+                    else
+                    {
+                        await DisplayAlert("Warning!", "Course instructor phone must only contain 10 digits!", "Ok");
+                    }
+                }
+                else
+                {
+                    await DisplayAlert("Warning!", "Course instructor must have a valid @WGU.edu email!", "Ok");
+                }
+            }
+            else
+            {
+                await DisplayAlert("Warning!", "All fields are required. Please try again!", "Ok");
+            }
         }
     }
 }

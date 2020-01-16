@@ -42,9 +42,40 @@ namespace MobileApps971
             newCourse.Term = _currentTerm.Id;
             //TODO add notifications
 
-            await conn.InsertAsync(newCourse);
-            await DisplayAlert("Notice", "New Course Created", "Ok");
-            await Navigation.PopModalAsync();
+            if (!HelperClass.IsNull(courseName.Text) && !HelperClass.IsNull(startDatePicker.Date.ToShortDateString()) &&
+                            !HelperClass.IsNull(endDatePicker.Date.ToShortDateString()) &&
+                            !HelperClass.IsNull((string)courseStatusPicker.SelectedItem) && !HelperClass.IsNull(instructorNameEntry.Text) &&
+                            !HelperClass.IsNull(instructorPhoneEntry.Text) && !HelperClass.IsNull(instructorEmailEntry.Text))
+            {
+                if (HelperClass.EmailIsValid(instructorEmailEntry.Text))
+                {
+                    if (HelperClass.PhoneIsValid(instructorPhoneEntry.Text))
+                    {
+                        if (newCourse.CourseStartDate <= newCourse.CourseEndDate)
+                        {
+                            await conn.InsertAsync(newCourse);
+                            await DisplayAlert("Notice", "New Course Created", "Ok");
+                            await Navigation.PopModalAsync();
+                        }
+                        else
+                        {
+                            await DisplayAlert("Warning!", "Start date must be earlier than end date!", "Ok");
+                        }
+                    }
+                    else
+                    {
+                        await DisplayAlert("Warning!", "Course instructor phone must only contain 10 digits!", "Ok");
+                    }
+                }
+                else
+                {
+                    await DisplayAlert("Warning!", "Course instructor must have a valid @WGU.edu email!", "Ok");
+                }
+            }
+            else
+            {
+                await DisplayAlert("Warning!", "All fields are required. Please try again!", "Ok");
+            }
         }
     }
 }

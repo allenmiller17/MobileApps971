@@ -12,32 +12,33 @@ using System.Collections.ObjectModel;
 
 namespace MobileApps971
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class EditAssessmentsPage : ContentPage
-	{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class EditAssessmentsPage : ContentPage
+    {
 
         private SQLiteAsyncConnection conn;
         private Assessments _currentAssessment;
 
-        public EditAssessmentsPage (Assessments _assessment)
-		{
-			InitializeComponent ();
+        public EditAssessmentsPage(Assessments _assessment)
+        {
+            InitializeComponent();
 
             _currentAssessment = _assessment;
 
             conn = DependencyService.Get<IMobileApps971_db>().GetConnection();
 
-		}
+        }
 
         protected override async void OnAppearing()
         {
             await conn.CreateTableAsync<Assessments>();
-            
+
 
             assessmentName.Text = _currentAssessment.AssessmentName;
-            assessmentTypePicker.SelectedItem = _currentAssessment.AssessmentType;
+            assessmentTypePicker.Text = "Type: "+_currentAssessment.AssessmentType;
             assessStartDatePicker.Date = _currentAssessment.AssessmentStart;
             assessEndDatePicker.Date = _currentAssessment.AssessmentEnd;
+            notificationsSwitch.IsToggled = _currentAssessment.AssessmentNotifications == 1 ? true : false;
 
             base.OnAppearing();
         }
@@ -45,32 +46,24 @@ namespace MobileApps971
         private async void SaveAssessmentButton_Clicked(object sender, EventArgs e)
         {
             await conn.CreateTableAsync<Assessments>();
-            var assessList =
-                await conn.QueryAsync<Assessments>($"SELECT Type " +
-                $"FROM Assessments " +
-                $"WHERE CourseId = '{_currentAssessment.CourseId}'");
+
             var updatedAssessment = _currentAssessment;
             updatedAssessment.AssessmentName = assessmentName.Text;
-            updatedAssessment.AssessmentType = (string)assessmentTypePicker.SelectedItem;
             updatedAssessment.AssessmentStart = assessStartDatePicker.Date;
             updatedAssessment.AssessmentEnd = assessEndDatePicker.Date;
+            updatedAssessment.AssessmentNotifications = notificationsSwitch.IsToggled == true ? 1 : 0;
 
-            foreach (Assessments assessments in assessList)
+            //Date Validation
+            if (updatedAssessment.AssessmentStart <= updatedAssessment.AssessmentEnd)
             {
-                if (updatedAssessment.AssessmentType == assessments.AssessmentType)
-                {
-                    await DisplayAlert("Warning",
-                        "There may only be one of each assessment type per course." +
-                        " Please try again", "Ok");
-                }
-                else
-                {
-                    await conn.UpdateAsync(updatedAssessment);
-                    await DisplayAlert("Notice", "Assessessment Successfully Updated", "Ok");
-                    await Navigation.PopModalAsync();
-                }
+                await conn.UpdateAsync(updatedAssessment);
+                await DisplayAlert("Notice", "Assessessment Successfully Updated", "Ok");
+                await Navigation.PopModalAsync(); 
             }
-
+            else
+            {
+                await DisplayAlert("Warning!", "Start date must be earlier than end date!", "Ok");
+            }                                      
         }
 
         private async void DeleteAssessmentButton_Clicked(object sender, EventArgs e)
@@ -81,6 +74,11 @@ namespace MobileApps971
                 await conn.DeleteAsync(_currentAssessment);
                 await Navigation.PopModalAsync();
             }
+        }
+
+        private void NotificationsSwitch_Toggled(object sender, ToggledEventArgs e)
+        {
+
         }
     }
 }

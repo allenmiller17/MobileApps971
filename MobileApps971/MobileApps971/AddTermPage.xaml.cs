@@ -35,7 +35,8 @@ namespace MobileApps971
             newTerm.StartDate = startDatePicker.Date;
             newTerm.EndDate = endDatePicker.Date;
 
-            if (newTerm.StartDate < newTerm.EndDate)
+            //Date Validtation
+            if (newTerm.StartDate <= newTerm.EndDate)
             {
                 await conn.InsertAsync(newTerm);
 
@@ -45,7 +46,7 @@ namespace MobileApps971
             }
             else
             {
-                await DisplayAlert("Warning!", "Start date must come befor end date!", "Ok");
+                await DisplayAlert("Warning!", "Start date must be earlier than end date!", "Ok");
             }
         }
     }

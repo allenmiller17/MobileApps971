@@ -33,10 +33,11 @@ namespace MobileApps971
         {
             await conn.CreateTableAsync<Assessments>();
             var assessList = 
-                await conn.QueryAsync<Assessments>($"SELECT Type " +
+                await conn.QueryAsync<Assessments>($"SELECT AssessmentType " +
                 $"FROM Assessments " +
                 $"WHERE CourseId = '{_currentCourse.CourseId}'");
 
+            //Checks to see if the current course has any assessments already... If so then Only the unused type is added to the picker
             foreach (Assessments assessments in assessList)
             {
                 if (String.IsNullOrEmpty(assessments.AssessmentType))
@@ -63,11 +64,24 @@ namespace MobileApps971
             newAssessment.AssessmentStart = assessStartDatePicker.Date;
             newAssessment.AssessmentEnd = assessEndDatePicker.Date;
             newAssessment.CourseId = _currentCourse.CourseId;
-            //TODO add notifications
+            newAssessment.AssessmentNotifications = notificationsSwitch.IsToggled == true ? 1 : 0;
 
-            await conn.InsertAsync(newAssessment);
-            await DisplayAlert("Notice", "Assessment Added to Course", "Ok");
-            await Navigation.PopModalAsync();
+            //Date Validation
+            if (newAssessment.AssessmentStart <= newAssessment.AssessmentEnd)
+            {
+                await conn.InsertAsync(newAssessment);
+                await DisplayAlert("Notice", "Assessment Added to Course", "Ok");
+                await Navigation.PopModalAsync(); 
+            }
+            else
+            {
+                await DisplayAlert("Warning!", "Start date must be earlier than end date!", "Ok");
+            }
+        }
+
+        private void NotificationsSwitch_Toggled(object sender, ToggledEventArgs e)
+        {
+
         }
     }
 }

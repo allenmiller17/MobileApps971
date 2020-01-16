@@ -9,7 +9,7 @@ namespace MobileApps971
         public static bool IsNull(string emptyField)
         {
             //checks for null values
-            if (!String.IsNullOrEmpty(emptyField))
+            if (String.IsNullOrEmpty(emptyField))
                 return true;
             return false;
         }
@@ -34,8 +34,29 @@ namespace MobileApps971
                 return false;
             }
 
-            return false;
-            
+            return true;
+
+        }
+
+        public static bool PhoneIsValid(string phone)
+        {
+            if (phone.Length != 10)
+            {
+                return false;
+            }
+
+            try
+            {
+                var IntPhone = Convert.ToInt64(phone);
+            }
+            catch (FormatException)
+            {
+
+                return false;
+            } 
+
+
+            return true;
         }
     }
 }
